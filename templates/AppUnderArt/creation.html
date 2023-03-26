@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content_creation %}
+    <h1 class="text-body text-center">{{ title }}</h1>
+    <br>
+    <div class="container px-xl-10 px-lg-22 text-center text-capitalize text-body">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+           {% if form.content_type.value == 'book' %}
+                {{ book_form.as_p }}
+            {% elif form.content_type.value == 'movie' %}
+                {{ movie_form.as_p }}
+            {% elif form.content_type.value == 'artwork' %}
+                {{ artwork_form.as_p }}
+            {% endif %}
+            <input type="submit" value="{{ send }}">
+        </form>
+
+    </div>
+{% endblock %}

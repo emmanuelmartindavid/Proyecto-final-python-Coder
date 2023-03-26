@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block change_content %}
+   <div class="container px-xl-10 px-lg-22 text-center text-capitalize">
+    <br><hr>
+     <form action="{% url 'AppUnderArtSearchBooks' %}">
+        {{ search_form.as_p }}
+     <input type="submit" value="Buscar libro">
+    </form>
+    {% if books %}
+        {% for book in books %}
+            <p> libro: {{ book.book_name }} autor: {{ book.book_author }} anio: {{ book.book_edition_year }}
+                     <a href="{% url 'AppUnderArtEditBook' book.book_name %}">Editar</a>
+                     <a href="{% url 'AppUnderArtDeleteBook' book.book_name %}">Eliminar</a>
+            </p>
+             <img src="{{ book.book_image.url }}" alt="{{ book.book_name }}" style="max-width: 200px;">
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

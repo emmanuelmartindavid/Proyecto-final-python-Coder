@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block change_content_movie %}
+    <br><hr>
+     <div class="container px-xl-10 px-lg-22 text-center text-capitalize">
+     <form action="{% url 'AppUnderArtSearchMovies' %}">
+        {{ search_form.as_p }}
+     <input type="submit" value="Buscar pelicula">
+    </form>
+    {% if movies %}
+        {% for movie in movies %}
+            <p> pelicula: {{ movie.movie_name }} director: {{ movie.movie_director }} anio de estreno: {{ movie.movie_release_year }}
+                     <a href="{% url 'AppUnderArtEditMovie' movie.movie_name %}">Editar</a>
+                     <a href="{% url 'AppUnderArtDeleteMovie' movie.movie_name %}">Eliminar</a>
+            </p>
+              <img src="{{ book.book_image.url }}" alt="{{ book.book_name }}" style="max-width: 200px;">
+        {% endfor %}
+    {% endif %}
+     </div>
+{% endblock %}
