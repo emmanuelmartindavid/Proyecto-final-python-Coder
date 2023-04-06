@@ -1,5 +1,4 @@
 from django.urls import path
-
 from AppUnderArt import views
 from AppUnderArt.static.views import create_content, about
 from AppUnderArt.viewsBook import *
@@ -30,5 +29,6 @@ urlpatterns = [
     path('underArt/editArtwork/<piece_name>', edit_artwork, name="AppUnderArtEditArtWrok"),
     path('underArt/deleteArtwork/<piece_name>', delete_artwork, name="AppUnderArtDeleteArtWork"),
 
-    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+    path('post/<int:pk>/comment/', views.add_comment_to_post, name='add_comment_to_post'),
+
 ]
