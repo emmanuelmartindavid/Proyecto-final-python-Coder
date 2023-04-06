@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="post">
+        <h1 class="post-title">{{ post.title }}</h1>
+        <p class="post-meta">{{ post.published_date }}</p>
+        <p class="post-content">{{ post.content }}</p>
+    </div>
+
+    <hr>
+
+    <div class="comments">
+        <h3>Comentarios</h3>
+        {% if comments.count > 0 %}
+            {% for comment in comments %}
+                <div class="comment">
+                    <p class="comment-author">{{ comment.author }}</p>
+                    <p class="comment-date">{{ comment.published_date }}</p>
+                    <p class="comment-text">{{ comment.text }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay comentarios todavía.</p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <div class="comment-form">
+        <h3>Agregar comentario</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit">Publicar comentario</button>
+        </form>
+    </div>
+{% endblock %}

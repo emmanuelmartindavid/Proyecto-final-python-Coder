@@ -5,4 +5,4 @@ from django.contrib.auth.models import User
 class Avatar(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    imagen = models.ImageField(upload_to='avatares', null=True, blank=True)
+    imagen = models.ImageField(null=True, blank=True, upload_to="media/")

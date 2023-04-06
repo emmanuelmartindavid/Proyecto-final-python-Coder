@@ -7,26 +7,34 @@ from account.models import Avatar
 
 def editar_usuario(request):
     user = request.user
+    try:
+        avatar = user.avatar
+    except Avatar.DoesNotExist:
+        avatar = None
+
     if request.method == "POST":
         form = UserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
             informacion = form.cleaned_data
             user.username = informacion["username"]
             user.email = informacion["email"]
-
-            try:
-                user.avatar.imagen = informacion["imagen"]
-            except:
-                avatar = Avatar(user=user, imagen=informacion["imagen"])
-                avatar.save()
-
             user.save()
+
+            if informacion.get("imagen"):
+                if avatar:
+                    avatar.imagen = informacion["imagen"]
+                    avatar.save()
+                else:
+                    avatar = Avatar(user=user, imagen=informacion["imagen"])
+                    avatar.save()
+
             return redirect("accountLogin")
 
     form = UserRegisterForm(initial={
         "username": user.username,
         "email": user.email,
-        "is_staff": user.is_staff
+        "is_staff": user.is_staff,
+        "imagen": avatar.imagen if avatar else None
     })
 
     context = {
@@ -41,6 +49,7 @@ def register_account(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
+            print(form.cleaned_data)
             form.save()
             return redirect("AppUnderArtCreateContent")
 

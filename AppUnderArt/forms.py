@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.contenttypes.models import ContentType
-from .models import Book, Movie, ArtWork
+from .models import Book, Movie, ArtWork, Comment, Post
 
 
 class BookForm(forms.ModelForm):
@@ -32,3 +32,15 @@ class ContentTypeForm(forms.Form):
 
 class SearchForm(forms.Form):
     name = forms.CharField(max_length=40)
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text',)
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'text',)

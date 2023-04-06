@@ -1,4 +1,6 @@
 from django.urls import path
+
+from AppUnderArt import views
 from AppUnderArt.static.views import create_content, about
 from AppUnderArt.viewsBook import *
 from AppUnderArt.viewsMovie import *
@@ -27,4 +29,6 @@ urlpatterns = [
     path('underArt/searchartWorks', search_artwork, name="AppUnderArtSearchArtWorks"),
     path('underArt/editArtwork/<piece_name>', edit_artwork, name="AppUnderArtEditArtWrok"),
     path('underArt/deleteArtwork/<piece_name>', delete_artwork, name="AppUnderArtDeleteArtWork"),
+
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
 ]
