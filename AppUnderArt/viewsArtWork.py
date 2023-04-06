@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from AppUnderArt.models import ArtWork
 from AppUnderArt.forms import SearchForm, ArtWorkForm
@@ -14,6 +15,7 @@ def search_artwork(request):
         return render(request, "AppUnderArt/search_artWork.html", context=context)
 
 
+@login_required(login_url='accountLogin')
 def create_artwork(request):
     if request.method == "POST":
         mi_form = ArtWorkForm(request.POST, request.FILES)
@@ -36,6 +38,7 @@ def create_artwork(request):
     return render(request, "AppUnderArt/creation.html", context=context)
 
 
+@login_required(login_url='accountLogin')
 def edit_artwork(request, piece_name):
     get_artwork = ArtWork.objects.get(piece_name=piece_name)
 
@@ -63,6 +66,7 @@ def edit_artwork(request, piece_name):
     return render(request, "AppUnderArt/edit_artWork.html", context=context)
 
 
+@login_required(login_url='accountLogin')
 def delete_artwork(request, piece_name):
     get_artwork = ArtWork.objects.get(piece_name=piece_name)
     get_artwork.delete()

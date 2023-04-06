@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from AppUnderArt.models import Book
 from AppUnderArt.forms import BookForm, SearchForm
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 def home(request):
@@ -19,6 +20,7 @@ def search_book(request):
         return render(request, "AppUnderArt/search_book.html", context=context)
 
 
+@login_required(login_url='accountLogin')
 def create_book(request):
     if request.method == "POST":
         mi_form = BookForm(request.POST, request.FILES)
@@ -41,6 +43,7 @@ def create_book(request):
     return render(request, "AppUnderArt/creation.html", context=context)
 
 
+@login_required(login_url='accountLogin')
 def edit_book(request, book_name):
     get_book = Book.objects.get(book_name=book_name)
 
@@ -69,6 +72,7 @@ def edit_book(request, book_name):
     return render(request, "AppUnderArt/edit_book.html", context=context)
 
 
+@login_required(login_url='accountLogin')
 def delete_book(request, book_name):
     get_book = Book.objects.get(book_name=book_name)
     get_book.delete()

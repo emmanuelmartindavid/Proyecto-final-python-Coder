@@ -1,28 +1,14 @@
-from django.http import HttpResponse
 from django.urls import path
-
-from AppUnderArt.forms import ContentTypeForm
+from AppUnderArt.static.views import create_content, about
 from AppUnderArt.viewsBook import *
 from AppUnderArt.viewsMovie import *
 from AppUnderArt.viewsArtWork import *
 
 
-def create_content(request):
-    if request.method == 'POST':
-        content_type = request.POST.get('content_type')
-
-        return redirect(f"AppUnderArtCreate{content_type}")
-
-    context = {
-        "form": ContentTypeForm(),
-        "title": "Crear contenido",
-        "send": "Crear",
-    }
-    return render(request, "AppUnderArt/creation.html", context=context)
-
-
 urlpatterns = [
     path('', home, name='AppUnderArtHome'),
+    path('underArt/about', about, name='AppUnderAbout'),
+
     path('underArt/createContent', create_content, name="AppUnderArtCreateContent"),
     path('underArt/createBook', create_book, name="AppUnderArtCreateBook"),
     path('underArt/createMovie', create_movie, name="AppUnderArtCreateMovie"),

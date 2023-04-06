@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from AppUnderArt.models import Movie
 from AppUnderArt.forms import SearchForm, MovieForm
@@ -14,6 +15,7 @@ def search_movie(request):
         return render(request, "AppUnderArt/search_movie.html", context=context)
 
 
+@login_required(login_url='accountLogin')
 def create_movie(request):
     if request.method == "POST":
         mi_form = MovieForm(request.POST)
@@ -36,6 +38,7 @@ def create_movie(request):
     return render(request, "AppUnderArt/creation.html", context=context)
 
 
+@login_required(login_url='accountLogin')
 def edit_movie(request, movie_name):
     get_movie = Movie.objects.get(movie_name=movie_name)
 
@@ -63,6 +66,7 @@ def edit_movie(request, movie_name):
     return render(request, "AppUnderArt/edit_movie.html", context=context)
 
 
+@login_required(login_url='accountLogin')
 def delete_movie(request, movie_name):
     get_movie = Movie.objects.get(movie_name=movie_name)
     get_movie.delete()

@@ -7,7 +7,8 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Clean Blog - Start Bootstrap Theme</title>
-    <link rel="icon" type="image/x-icon" href="{% static 'AppUnderArt/assets/img/cosmos.jpg' %}"/>
+	</style>
+    <link rel="icon" type="image/x-icon" href="{% static 'AppUnderArt/assets/img/voyageDansMune.png' %}"/>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -22,7 +23,7 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="base.html">UndeArt</a>
+        <a class="navbar-brand" href="base.html">Artika</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
@@ -30,26 +31,38 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 bg-black"
                                         href="{% url 'AppUnderArtHome' %}">Home</a></li>
 
 
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 bg-black"
                                         href="{% url 'AppUnderArtBooks' %}">Libros</a>
                 </li>
 
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'AppUnderArtMovies' %}">Peliculas</a>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 bg-black" href="{% url 'AppUnderArtMovies' %}">Peliculas</a>
                 </li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'AppUnderArtArtWorks' %}">Pinturas</a>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 bg-black" href="{% url 'AppUnderArtArtWorks' %}">Pinturas</a>
                 </li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 bg-black" href="{% url 'AppUnderAbout' %}">Acerca de mi</a>
+                </li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 bg-black"
                                         href="{% url 'AppUnderArtCreateContent' %}">Agregar contenido</a></li>
+                  {% if user.is_authenticated %}
+                    <img src="{{ user.avatar.imagen.url }}" alt="usuario" height="30 px">
+                    <a class="navbar-brand">{{ user.username }}</a>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 bg-black" href="{% url 'accountLogout' %}">Logout</a>
+                    {% else %}
+                       <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 bg-black" href="{% url 'accountRegister' %}">Registrar</a>
+                       <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 bg-black" href="{% url 'accountLogin' %}">Login</a>
+
+                {% endif %}
             </ul>
         </div>
     </div>
 </nav>
 
 <main>
+
     {% block content_creation %}{% endblock %}
     {% block change_content %}{% endblock %}
     {% block change_content_movie %}{% endblock %}
@@ -65,7 +78,7 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
                     <h1>Arte</h1>
-                    <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                    <span class="subheading">Un blog de Arte y mas</span>
                 </div>
             </div>
         </div>
@@ -78,8 +91,8 @@
             <!-- Post preview-->
             <div class="post-preview">
                 <a href="../AppUnderArt/static/AppUnderArt/post.html">
-                    <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-                    <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
+                    <h2 class="post-title"></h2>
+                    <h3 class="post-subtitle"></h3>
                 </a>
                 <p class="post-meta">
                     Posted by
@@ -91,8 +104,7 @@
             <hr class="my-4"/>
             <!-- Post preview-->
             <div class="post-preview">
-                <a href="../AppUnderArt/static/AppUnderArt/post.html"><h2 class="post-title">I believe every human has a
-                    finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
+                <a href="../AppUnderArt/static/AppUnderArt/post.html"><h2 class="post-title"></h2></a>
                 <p class="post-meta">
                     Posted by
                     <a href="#!">Start Bootstrap</a>
@@ -104,9 +116,8 @@
             <!-- Post preview-->
             <div class="post-preview">
                 <a href="../AppUnderArt/static/AppUnderArt/post.html">
-                    <h2 class="post-title">Science has not yet mastered prophecy</h2>
-                    <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next
-                        ten.</h3>
+                    <h2 class="post-title"></h2>
+                    <h3 class="post-subtitle"></h3>
                 </a>
                 <p class="post-meta">
                     Posted by
@@ -119,9 +130,8 @@
             <!-- Post preview-->
             <div class="post-preview">
                 <a href="../AppUnderArt/static/AppUnderArt/post.html">
-                    <h2 class="post-title">Failure is not an option</h2>
-                    <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to
-                        future generations.</h3>
+                    <h2 class="post-title"></h2>
+                    <h3 class="post-subtitle">.</h3>
                 </a>
                 <p class="post-meta">
                     Posted by
